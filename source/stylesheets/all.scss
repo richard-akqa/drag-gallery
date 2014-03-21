@@ -1,0 +1,29 @@
+@import "bourbon";
+
+@charset "utf-8";
+
+body {
+	background: black;
+	font-family: sans-serif;
+}
+
+#drag-gallery-container{
+	background: gray;
+	margin-left: -250px;
+	margin-top: -250px;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	height: 500px;
+	width: 500px;
+	@include clearfix;
+	.image{
+		background: gray;
+		float: left;
+		width: 100px;
+		height: 100px;
+		font-size: 14px;
+		color: white;
+		text-align: center;
+	}
+}
