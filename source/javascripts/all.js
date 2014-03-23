@@ -1,4 +1,4 @@
 //= require_tree .
 
-//= require ./vendor/jquery
+//= require ./vendor/zepto
 //= require ./views/main_view

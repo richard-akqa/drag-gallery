@@ -3,27 +3,46 @@
 @charset "utf-8";
 
 body {
-	background: black;
+	background: white;
 	font-family: sans-serif;
 }
 
-#drag-gallery-container{
-	background: gray;
-	margin-left: -250px;
-	margin-top: -250px;
+#drag-gallery{
+	margin-left: -245px;
+	margin-top: -115px;
 	position: fixed;
 	left: 50%;
 	top: 50%;
-	height: 500px;
-	width: 500px;
+	height: 230px;
+	width: 490px;
 	@include clearfix;
+	#mouse-img{
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 0.3;
+		width: 100px;
+		height: 100px;
+		pointer-events: none;
+		img{
+			width: 100%;
+			height: 100%;
+		}
+	}
 	.image{
 		background: gray;
+		box-shadow: 5px 5px 5px 0px rgba(50, 50, 50, 0.25);
 		float: left;
 		width: 100px;
 		height: 100px;
 		font-size: 14px;
 		color: white;
 		text-align: center;
+		&:nth-of-type(n+5){
+			margin-top: 30px;
+		}
+		&:not(:nth-of-type(4n+1)){
+			margin-left: 30px;
+		}
 	}
 }

@@ -3,24 +3,63 @@ DG.VIEW = (function(window){
 
 	var view = {};
 
+	view.replaceImg = function(target, newTarget, targetImg, newTargetImg){
+		
+		$(target).attr("src", newTargetImg);
+		$(newTarget).attr("src", targetImg);
+	}
+
 	view.mouseListenInit = function(){
-		var offsetTop = $("#drag-gallery-container").offset().top,
-			offsetLeft = $("#drag-gallery-container").offset().left;
 
-		$(".image").on("mousedown", function(){
-			var currentEl = this,
-				currentLocationX = $(this).offset().left - offsetLeft,
-				currentLocationY = $(this).offset().top - offsetTop;
+		var $el = $("#drag-gallery"),
+			offsetTop = $el.offset().top,
+			offsetLeft = $el.offset().left,
+			target = undefined,
+			newTarget = undefined,
+			targetImg = undefined,
+			newTargetImg = undefined;
 
-			$("#drag-gallery-container").on("mousemove", function(e){
-				var x = e.pageX - offsetLeft,
-					y = e.pageY - offsetTop;
-				console.log({"x": x, "y": y});
-				$("#drag-gallery-container").on("mouseup", function(e){
-					$("#drag-gallery-container").unbind("mousemove");
-				});
-			})
-		});
+		function onMouseDown(e, el){
+
+			if (e.button === 0){	
+				target = e.target;
+				targetImg = $(target).attr("src");
+
+				$("#mouse-img").html('<img src="' + targetImg + '">');
+
+				$(el).on("mousemove", function(e){
+					onMouseMove(e, el);
+				})
+			}
+		}
+
+		function onMouseMove(e, el){
+			var x = e.pageX - offsetLeft,
+				y = e.pageY - offsetTop;
+
+			$("#mouse-img").css({"top": y, "left": x});
+		}
+
+		function onMouseUp(e, el){
+			newTarget = e.target;
+			newTargetImg = $(newTarget).attr("src");
+
+			$(el).off("mousemove");
+			$("#mouse-img").html('');
+
+			view.replaceImg(target, newTarget, targetImg, newTargetImg);
+		}
+
+		$el.mousedown(function(event){
+			event.preventDefault();
+			onMouseDown(event, this);
+		})
+
+		$el.mouseup(function(event){
+			event.preventDefault();
+			onMouseUp(event, this);
+		})
+
 	}
 
 	view.init = function(){
