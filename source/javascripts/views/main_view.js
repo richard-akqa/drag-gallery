@@ -47,7 +47,9 @@ DG.VIEW = (function(window){
 			$(el).off("mousemove");
 			$("#mouse-img").html('');
 
-			view.replaceImg(target, newTarget, targetImg, newTargetImg);
+			if(newTargetImg){
+				view.replaceImg(target, newTarget, targetImg, newTargetImg);
+			}
 		}
 
 		$el.mousedown(function(event){

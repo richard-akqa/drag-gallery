@@ -9,10 +9,9 @@ body {
 
 #drag-gallery{
 	margin-left: -245px;
-	margin-top: -115px;
-	position: fixed;
+	position: absolute;
 	left: 50%;
-	top: 50%;
+	top: 20%;
 	height: 230px;
 	width: 490px;
 	@include clearfix;
